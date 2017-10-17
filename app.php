@@ -72,6 +72,15 @@ $app->get('/memcached/{key}', function ($key) {
     # [END memcached_get]
 });
 
+$app->get('/memcached/list', function () {
+    # [START memcached_getlist]
+    $memcache = new Memcached;
+    $keys = $memcache->getAllKeys();
+    $memcache->getDelayed($keys);
+    return $memcache->fetchAll();
+    # [END memcached_getlist]
+});
+
 $app->put('/memcached/{key}', function ($key, Request $request) {
     # [START memcached_put]
     $memcache = new Memcached;
